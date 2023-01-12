@@ -1,0 +1,22 @@
+{
+  "name": "ghost-unlock-server",
+  "version": "1.0.0",
+  "description": "Create and manage ghost blog memberships and teirs using Unlock Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "unlock",
+    "ghost"
+  ],
+  "author": "dannithomx",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodemailer": "^6.8.0"
+  }
+}
