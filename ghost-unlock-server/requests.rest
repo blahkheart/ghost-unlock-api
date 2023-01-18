@@ -1,12 +1,11 @@
-# POST http://localhost:5000/login
-GET https://app.unlock-protocol.com/checkout?client_id=fee8-102-36-149-129.eu.ngrok.io&redirect_uri=https%3A%2F%2Ffee8-102-36-149-129.eu.ngrok.io%2Flogin%2Fverify&email=iamraykhell%40gmail.com
-# POST http://localhost:5000/login?code=eyJkIjoiYXBwLnVubG9jay1wcm90b2NvbC5jb20gd2FudHMgeW91IHRvIHNpZ24gaW4gd2l0aCB5b3VyIEV0aGVyZXVtIGFjY291bnQ6XG4weDA5MDNDRjJCRGExMDMxN0EzZDc4NWY1ODE4ODc0Q0NhZjM2ZTY0YTlcblxuXG5VUkk6IGh0dHBzOi8vYXBwLnVubG9jay1wcm90b2NvbC5jb21cblZlcnNpb246IDFcbkNoYWluIElEOiAxXG5Ob25jZTogWkx0ajZnaFk0cXpQcm5GdWVcbklzc3VlZCBBdDogMjAyMi0xMi0xOVQxMDozMDozMC43NDdaXG5FeHBpcmF0aW9uIFRpbWU6IDIwMjItMTItMjZUMTA6MzA6MzAuNzQ2WlxuUmVzb3VyY2VzOlxuLSBodHRwczovL2U2ZDktMTAyLTM2LTE0OS0xMjkuZXUubmdyb2suaW8vIiwicyI6IjB4N2I2ZmZiYzgyOTFhZjExOTdjN2JjZjBiOWVmNDkzNmE3YTJiNjI2ZmVjNjQ1MTc2MTk2YmIxOTY5MWNiZDdlMzAwNTNhZmE0MmFmMjg1ZTBmMDNkZjk3ZWIxNzBlNWRjOGEwZmI4MzYzNDc3OTZhMmZhYjcxNTIyMmQ1OThiNzQxYiJ9&state=undefined
-Content-Type: text/html/json
-# Content-Type: application/json
+# GET https://app.unlock-protocol.com/checkout?client_id=fee8-102-36-149-129.eu.ngrok.io&redirect_uri=https%3A%2F%2Ffee8-102-36-149-129.eu.ngrok.io%2Flogin%2Fverify&email=iamraykhell%40gmail.com
+POST http://localhost:5000/login?code=eyJkIjoiYXBwLnVubG9jay1wcm90b2NvbC5jb20gd2FudHMgeW91IHRvIHNpZ24gaW4gd2l0aCB5b3VyIEV0aGVyZXVtIGFjY291bnQ6XG4weDA5MDNDRjJCRGExMDMxN0EzZDc4NWY1ODE4ODc0Q0NhZjM2ZTY0YTlcblxuXG5VUkk6IGh0dHBzOi8vYXBwLnVubG9jay1wcm90b2NvbC5jb21cblZlcnNpb246IDFcbkNoYWluIElEOiAxXG5Ob25jZTogWkx0ajZnaFk0cXpQcm5GdWVcbklzc3VlZCBBdDogMjAyMi0xMi0xOVQxMDozMDozMC43NDdaXG5FeHBpcmF0aW9uIFRpbWU6IDIwMjItMTItMjZUMTA6MzA6MzAuNzQ2WlxuUmVzb3VyY2VzOlxuLSBodHRwczovL2U2ZDktMTAyLTM2LTE0OS0xMjkuZXUubmdyb2suaW8vIiwicyI6IjB4N2I2ZmZiYzgyOTFhZjExOTdjN2JjZjBiOWVmNDkzNmE3YTJiNjI2ZmVjNjQ1MTc2MTk2YmIxOTY5MWNiZDdlMzAwNTNhZmE0MmFmMjg1ZTBmMDNkZjk3ZWIxNzBlNWRjOGEwZmI4MzYzNDc3OTZhMmZhYjcxNTIyMmQ1OThiNzQxYiJ9&state=undefined
+# Content-Type: text/html/json
+Content-Type: application/json
 
-# {
-#     "email":"iamraykhell@gmail.com" 
-# }
+{
+    "email":"iamraykhell@gmail.com" 
+}
 
 ###
 POST http://localhost:5000/signup

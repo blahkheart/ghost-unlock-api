@@ -21,30 +21,30 @@ const transporter = nodemailer.createTransport({
 // replace with db connection
 let users = [];
 
-const verifySignature = (sig) => {
-  if (!sig) res.status(400).send("No signature provided");
-  const data = JSON.parse(Buffer.from(sig, "base64"));
-  const address = ethers.utils.verifyMessage(data.d, data.s);
-  return address
-};
+// const verifySignature = (sig) => {
+//   if (!sig) res.status(400).send("No signature provided");
+//   const data = JSON.parse(Buffer.from(sig, "base64"));
+//   const address = ethers.utils.verifyMessage(data.d, data.s);
+//   return address
+// };
 
-const generateSignUpWithUnlockURL = (req) => {
-  const signinWithUnlock = new URL(process.env.UNLOCK_APP_CHECKOUT);
-  const signupVerifyURI = new URL(process.env.GHOST_SIGNUP_VERIFY_URI);
-  const clientId = signupVerifyURI.hostname;
-  signinWithUnlock.searchParams.append("client_id", clientId);
-  signinWithUnlock.searchParams.append("redirect_uri", signupVerifyURI);
-  return signinWithUnlock.toString();
-};
-const generateSignInWithUnlockURL = (req) => {
-  const signinWithUnlock = new URL(process.env.UNLOCK_APP_CHECKOUT);
-  const loginVerifyURI = new URL(process.env.GHOST_LOGIN_VERIFY_URI);
-  const clientId = loginVerifyURI.hostname;
-  signinWithUnlock.searchParams.append("client_id", clientId);
-  signinWithUnlock.searchParams.append("redirect_uri", loginVerifyURI);
-  signinWithUnlock.searchParams.append("email", req.body.email);
-  return signinWithUnlock.toString();
-};
+// const generateSignUpWithUnlockURL = (req) => {
+//   const signinWithUnlock = new URL(process.env.UNLOCK_APP_CHECKOUT);
+//   const signupVerifyURI = new URL(process.env.GHOST_SIGNUP_VERIFY_URI);
+//   const clientId = signupVerifyURI.hostname;
+//   signinWithUnlock.searchParams.append("client_id", clientId);
+//   signinWithUnlock.searchParams.append("redirect_uri", signupVerifyURI);
+//   return signinWithUnlock.toString();
+// };
+// const generateSignInWithUnlockURL = (req) => {
+//   const signinWithUnlock = new URL(process.env.UNLOCK_APP_CHECKOUT);
+//   const loginVerifyURI = new URL(process.env.GHOST_LOGIN_VERIFY_URI);
+//   const clientId = loginVerifyURI.hostname;
+//   signinWithUnlock.searchParams.append("client_id", clientId);
+//   signinWithUnlock.searchParams.append("redirect_uri", loginVerifyURI);
+//   signinWithUnlock.searchParams.append("email", req.body.email);
+//   return signinWithUnlock.toString();
+// };
 
 app.post("/login", async (req, res) => {
   //login flow
@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
   // server responds with a 'signin with unlock url' sent to email address
   // client clicks the link in their email which takes them through the signinWithUnlock checkout and redirects to /login/verify endpoint
   // this decodes their address from the signature and checks db for a user with the address and the email combination
-  const signInURL = generateSignInWithUnlockURL(req);
+  const signInURL = "https://app.unlock-protocol.com/checkout";
   const recepient = req.body.email;
   if (!recepient) res.status(400).send("No email provided");
   console.log("res:: ", res.body);

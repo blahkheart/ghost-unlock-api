@@ -10,6 +10,8 @@ let users = [
   },
 ];
 
+const app = express()
+
 router.post("/", (req, res, next) => {
     const codeFromURL = req.query.code;
     const email = req.body.email
