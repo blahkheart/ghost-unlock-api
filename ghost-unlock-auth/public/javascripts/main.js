@@ -18,7 +18,7 @@ $(document).ready(function () {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
-    return response;
+    return response.json;
   }
 
   submitBtn.on("click", function (e) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
     const userEmail = formData[0].value;
     console.log("Email: ", userEmail);
     console.log("Code: ", code);
-    submitForm("http://localhost:3000/signup/verify", {
+    submitForm('https://1e8d-102-36-149-129.eu.ngrok.io/signup/verify', {
       email: userEmail,
       code,
     }).then((data) => {
