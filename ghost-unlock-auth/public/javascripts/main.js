@@ -4,9 +4,20 @@ $(document).ready(function () {
   const code = params.code;
   const signupForm = $(".gh-unlock_signup-form");
   const submitBtn = $(".gh-unlock_signup-btn");
+  const emailModal = $("#gh-unlock_signup-modal");
+  
+  const openModal = function ($el) {
+    $el.addClass("is-active");
+  };
+  
 
-  const submitForm = async function (url = "", data = {}) {
-    const response = await fetch(url, {
+submitBtn.on("click", function (e) {
+  e.preventDefault();
+  const formData = signupForm.serializeArray();
+  const userEmail = formData[0].value;
+  submitBtn.addClass("is-loading")
+
+    fetch("https://ac58-197-210-54-211.eu.ngrok.io/signup/verify", {
       method: "POST",
       mode: "same-origin",
       cache: "no-cache",
@@ -16,22 +27,19 @@ $(document).ready(function () {
       },
       redirect: "follow",
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response.json;
-  }
-
-  submitBtn.on("click", function (e) {
-    e.preventDefault();
-    const formData = signupForm.serializeArray();
-    const userEmail = formData[0].value;
-    console.log("Email: ", userEmail);
-    console.log("Code: ", code);
-    submitForm('https://1e8d-102-36-149-129.eu.ngrok.io/signup/verify', {
-      email: userEmail,
-      code,
-    }).then((data) => {
-      console.log(data); // JSON data parsed by `data.json()` call
-    });
+      body: JSON.stringify({ email: userEmail, code }), // body data type must match "Content-Type" header
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        if (res && res.status === 201) {
+          openModal(emailModal);
+          return res.json();
+        } else {
+          submitBtn.removeClass("is-loading")
+          submitBtn.text("Try again")
+          return res.status;
+        }
+      })
+      .then((res) => console.log("data", res));
   });
 });
