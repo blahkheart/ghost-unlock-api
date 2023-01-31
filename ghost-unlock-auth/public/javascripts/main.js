@@ -15,6 +15,7 @@ submitBtn.on("click", function (e) {
   e.preventDefault();
   const formData = signupForm.serializeArray();
   const userEmail = formData[0].value;
+  console.log(userEmail)
   submitBtn.addClass("is-loading")
 
     fetch("https://ac58-197-210-54-211.eu.ngrok.io/signup/verify", {
@@ -37,7 +38,7 @@ submitBtn.on("click", function (e) {
         } else {
           submitBtn.removeClass("is-loading")
           submitBtn.text("Try again")
-          return res.status;
+          return res.json();
         }
       })
       .then((res) => console.log("data", res));
