@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const ethers = require("ethers");
 const nodemailer = require("nodemailer");
 const app = express();
+const axios = require("axios");
 
 app.use(express.json()); // used in request processing pipeline
 const port = process.env.PORT || 5000;
@@ -145,6 +146,16 @@ app.post("/signup/verify", (req, res) => {
     res.status(400).send("Already signed up");
   }
 });
+
+//  const address = await req.query.address;
+const payload = {
+  email: "action",
+  address: "0xc0addf0efef04r234252305tyg35t3453",
+};
+const ghostAPIURL =
+  "http://localhost:3000/signup/verify/test@gmail.com/?token=K40QjoilbO1-POnysfPbbz8AtA8tkjmx&action=signin&address=0xCA7632327567796e51920F6b16373e92c7823854";
+
+axios.get(ghostAPIURL).catch((err) => console.log(err));
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

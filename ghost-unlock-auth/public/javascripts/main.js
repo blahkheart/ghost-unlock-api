@@ -11,14 +11,14 @@ $(document).ready(function () {
   };
   
 
-submitBtn.on("click", function (e) {
-  e.preventDefault();
-  const formData = signupForm.serializeArray();
-  const userEmail = formData[0].value;
-  console.log(userEmail)
-  submitBtn.addClass("is-loading")
+  submitBtn.on("click", function (e) {
+    e.preventDefault();
+    const formData = signupForm.serializeArray();
+    const userEmail = formData[0].value;
+    console.log(userEmail)
+    submitBtn.addClass("is-loading")
 
-    fetch("https://ac58-197-210-54-211.eu.ngrok.io/signup/verify", {
+    fetch("https://598c-102-36-149-129.eu.ngrok.io/signup/verify", {
       method: "POST",
       mode: "same-origin",
       cache: "no-cache",
@@ -30,17 +30,18 @@ submitBtn.on("click", function (e) {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({ email: userEmail, code }), // body data type must match "Content-Type" header
     })
-      // .then((res) => res.json())
       .then((res) => {
+        console.log("RES:: ", res);
         if (res && res.status === 201) {
           openModal(emailModal);
           return res.json();
         } else {
-          submitBtn.removeClass("is-loading")
-          submitBtn.text("Try again")
+          submitBtn.removeClass("is-loading");
+          submitBtn.text("Try again");
           return res.json();
         }
       })
       .then((res) => console.log("data", res));
   });
+  
 });
