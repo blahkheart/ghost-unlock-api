@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const ethers = require("ethers");
@@ -6,17 +6,9 @@ const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const api_key = process.env.ADMIN_API_KEY;
 const [id, secret] = api_key.split(":");
-const {transporter} = require("../controllers/email")
+const {transporter} = require("../controllers/emailController")
 // Replace with db
 const {users} = require("../config/users")
-
-// const generateAccessToken = (data) => {
-//  return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '1h' });
-// };
-
-// function encodeB64(str) {
-//   return btoa(encodeURIComponent(str));
-// }
 
 const token = jwt.sign({}, Buffer.from(secret, "hex"), {
   keyid: id,
@@ -104,24 +96,14 @@ router.post("/", async function (req, res, next) {
           .then((response) => {
             
             // handle response from ghost and respond appropriately
-            // response && response.status === 201
-            // ? (isMagicLinkSent = true)
-            // : (isMagicLinkSent = false);
             if (response && response.status === 201) {
               res.status(201).send(newMember)
-              // i
             } else {
-              res.status(402).send({msg: "error sending magic link"})
+              res.status(400).send({ msg: "error sending magic link" });
+              // res.status(402).redirect("/signup")
             } 
           })
           .catch((err) => console.log(err));
-        // if (isMagicLinkSent) {
-        //   console.log("MAGIC LINK00:::", isMagicLinkSent);
-        //   res.send(newMember);
-        // } else {
-        //   res.status(402);
-        //   // res.end()
-        // }
       } catch (e) {
         res.send(e);
       }
@@ -129,7 +111,7 @@ router.post("/", async function (req, res, next) {
       res.status(409).json({ message: "User already exist" });
     }
   } catch (e) {
-    console.log(e)
+    console.log(e.message)
   }
 });
 

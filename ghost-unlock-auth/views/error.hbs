@@ -1,3 +1,11 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+{{!< layout}}
+<div id="gh-unlock_signup" class="gh-unlock_signup is-flex level-item">
+  <div class="gh-unlock_content has-text-centered is-flex is-flex-direction-column is-align-items-center">
+      <h1 class=" is-size-4 mb-6 has-text-centered has-text-weight-semibold is-uppercase">Ghost Unlock</h1>
+
+    <h2 class="has-text-danger is-size-3 mt-4">{{error.status}}</h2>
+    <h1 class=" is-size-1  mt-6 mb-6">{{message}}</h1>
+    <a class="button is-black" href="http://localhost:2368/">Go Home</a>
+    {{!-- <pre>{{error.stack}}</pre> --}}
+  </div>
+</div>
