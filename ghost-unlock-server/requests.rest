@@ -8,13 +8,13 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/signup/verify/tdftrt
+POST http://localhost:3000/signup/verify
 # GET http://localhost:2368/members/?token=K40QjoilbO1-POnysfPbbz8AtA8tkjmx&action=signin&address=0xCA7632327567796e51920F6b16373e92c7823854
 Content-Type: application/json
 
 {
     "email":"iamraykhell@gmail.com", 
-    "code":"fytfufuyfuyfuyuguf"
+    "code":"eyJkIjoiYXBwLnVubG9jay1wcm90b2NvbC5jb20gd2FudHMgeW91IHRvIHNpZ24gaW4gd2l0aCB5b3VyIEV0aGVyZXVtIGFjY291bnQ6XG4weDc2NkExMDE5NDU0Qzk1OTFDODAyRDg4ZjlFZDk2RDY3MjYwOTkzRjFcblxuXG5VUkk6IGh0dHBzOi8vYXBwLnVubG9jay1wcm90b2NvbC5jb21cblZlcnNpb246IDFcbkNoYWluIElEOiA0MjE2MVxuTm9uY2U6IEsxaUV5UzQyS3ppRHVSS1VTXG5Jc3N1ZWQgQXQ6IDIwMjMtMDMtMTFUMTA6Mjc6NDkuMzc0WlxuRXhwaXJhdGlvbiBUaW1lOiAyMDIzLTAzLTE4VDEwOjI3OjQ5LjM3NFpcblJlc291cmNlczpcbi0gaHR0cHM6Ly8wY2I2LTE5Ny0yMTAtNTQtODEuZXUubmdyb2suaW8vIiwicyI6IjB4MjU3ODhkODdlZDk3ZmJmMzIxNmM2YjFjZDg2ZWNkNTE4OWFmNTM4NjQ4YjI3MWNiNDk2YjgyNGFkMDI1MTJmODZiMGIzYmEwNzY1OTk0MzdmM2RjZDgxMWNhMWU2NTZhN2FmZmViMDZlNDkxN2E2ODY4YjRjZjJlMDM5MDY4MDIxYyJ9"
 }
 
 ###

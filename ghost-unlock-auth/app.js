@@ -11,9 +11,10 @@ var usersRouter = require("./routes/users");
 var signupRouter = require("./routes/signup");
 var loginRouter = require("./routes/login");
 var authRouter = require("./routes/auth-verify");
+// connect to database
+connectDB()
 
 var app = express();
-connectDB()
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -33,7 +34,6 @@ app.use("/signup/verify", signupRouter);
 app.use("/login", loginRouter);
 app.use(authRouter);
 app.use("/users", usersRouter);
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
