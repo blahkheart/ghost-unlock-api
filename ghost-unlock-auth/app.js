@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/signup", indexRouter);
 app.use("/signup/verify", signupRouter);
 app.use("/login", loginRouter);
-app.use(authRouter);
+app.use("/auth/verify", authRouter);
 app.use("/users", usersRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

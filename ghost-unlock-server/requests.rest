@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/signup/verify
+GET http://localhost:3000/auth/verify/iamraykhell@gmail.com?action=signup&address=0x766A1019454C9591C802D88f9Ed96D67260993F1
 # GET http://localhost:2368/members/?token=K40QjoilbO1-POnysfPbbz8AtA8tkjmx&action=signin&address=0xCA7632327567796e51920F6b16373e92c7823854
 Content-Type: application/json
 

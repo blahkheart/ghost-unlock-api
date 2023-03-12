@@ -50,7 +50,7 @@ const signUp = async function (req, res, next) {
 
     const isPending = await User.findOne({
       // $or: [{ address }, { email }],
-      $and: [{ address },{ email }, { emailVerified: false }],
+      $and: [{ address }, { email }, { emailVerified: false }],
     });
 
     // create new member
@@ -86,19 +86,21 @@ const signUp = async function (req, res, next) {
     }
   } catch (e) {
     console.log(e.message);
-    const msg = e.message
+    const msg = e.message;
     const duplicateKeyAddressError = msg.match(/address: "(.*)"/i);
     const duplicateKeyEmailError = msg.match(/email: "(.*)"/i);
 
-    if (duplicateKeyAddressError) res.status(400).render("error", {
-      message: `Address: ${duplicateKeyAddressError[1]} already exists`,
-      error: { status: 400 },
-    });
-  
-    if (duplicateKeyEmailError) res.status(400).render("error", {
-      message: `Email: ${duplicateKeyEmailError[1]} already exists`,
-      error: { status: 400 },
-    });
+    if (duplicateKeyAddressError)
+      res.status(400).render("error", {
+        message: `Address: ${duplicateKeyAddressError[1]} already exists`,
+        error: { status: 400 },
+      });
+
+    if (duplicateKeyEmailError)
+      res.status(400).render("error", {
+        message: `Email: ${duplicateKeyEmailError[1]} already exists`,
+        error: { status: 400 },
+      });
   }
 };
 
@@ -109,7 +111,10 @@ const login = async function (req, res, next) {
 
     // check code is provided
     if (!codeFromURL) {
-      res.status(400).render("error", { message: "No code found in URL" });
+      res.status(400).render("error", {
+        message: "No code found in URL",
+        error: { status: 400 },
+      });
     }
     // decode
     const data = JSON.parse(Buffer.from(codeFromURL, "base64"));
@@ -119,7 +124,6 @@ const login = async function (req, res, next) {
     const user = await User.findOne({
       $and: [{ address }, { emailVerified: true }],
     });
-    console.log("USR", user);
 
     if (user) {
       const email = user.email;
@@ -129,24 +133,24 @@ const login = async function (req, res, next) {
         address,
       };
       // make call to ghost api with email and address
-      // try {
-      //   axios
-      //     .post(ghostAPIURL, payload, { headers })
-      //     .then((response) => {
-      //       if (response && response.status === 201) {
-      //         res.status(201).render("login", {
-      //           title: "Ghost-Unlock Login",
-      //         });
-      //       } else {
-      //         res
-      //           .status(400)
-      //           .render("error", { message: "error sending magic link" });
-      //       }
-      //     })
-      //     .catch((err) => res.render("error", { message: err }));
-      // } catch (e) {
-      //   res.send(e);
-      // }
+      try {
+        axios
+          .post(ghostAPIURL, payload, { headers })
+          .then((response) => {
+            if (response && response.status === 201) {
+              res.status(201).render("login", {
+                title: "Ghost-Unlock Login",
+              });
+            } else {
+              res
+                .status(400)
+                .render("error", { message: "error sending magic link" });
+            }
+          })
+          .catch((err) => res.render("error", { message: err }));
+      } catch (e) {
+        res.send(e);
+      }
     } else {
       res.status(404).render("error", {
         message: "User not found!",
@@ -161,19 +165,20 @@ const login = async function (req, res, next) {
 const verifyUser = async function (req, res) {
   try {
     /** TODOs
-     * validate email address
-     **/
+    * validate email address
+    **/
 
     // get user data from req
     const email = req.params.email;
     const address = req.parsedParams.address;
     const action = req.parsedParams.action;
 
+    if(!action) res.status(400).render("error", {message: "No action found in request", error: {status: 400}})
+    
     const user = await User.findOne({
       $and: [{ address }, { email }],
     });
 
-    console.log("USER:verify-user", user);
     const filter = { email: email, address: address };
 
     if (!user) res.status(404).end();
@@ -184,8 +189,7 @@ const verifyUser = async function (req, res) {
       const updatedUser = await User.findOneAndUpdate(filter, update);
       res.status(200).json(updatedUser);
     } else if (action === "signin" && user.emailVerified === false) {
-      // console.log("USERXX", user)
-      res.status(403).end();
+      res.status(403).render("error", { message: "User email not verified, verify email to complete sign up and login", error: {status:403}});
     } else {
       res.status(200).end();
     }
