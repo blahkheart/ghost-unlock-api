@@ -13,6 +13,7 @@
   "author": "dannithomx",
   "license": "MIT",
   "dependencies": {
+    "@unlock-protocol/contracts": "^0.0.16",
     "axios": "^1.2.6",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
