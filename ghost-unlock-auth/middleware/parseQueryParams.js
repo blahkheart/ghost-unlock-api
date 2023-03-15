@@ -7,5 +7,5 @@ const parseQueryParams = (req, res, next) => {
 };
 
 module.exports = {
-    parseQueryParams
+  parseQueryParams
 }

@@ -21,6 +21,17 @@ const headers = {
   "Accept-Version": "v5.24",
 };
 
+const requestSignUp = function (req, res, next) {
+  const hasKey = req.hasValidKey
+  const address = req.parsedParams.address;
+  res.render("signup", {
+    title: "Ghost-Unlock Sign Up",
+    topic: "authentication",
+    hasKey,
+    address
+  });
+};
+
 const signUp = async function (req, res, next) {
   try {
     // get code from URL
@@ -165,16 +176,22 @@ const login = async function (req, res, next) {
 const verifyUser = async function (req, res) {
   try {
     /** TODOs
-    * validate email address
-    **/
+     * validate email address
+     **/
 
     // get user data from req
     const email = req.params.email;
     const address = req.parsedParams.address;
     const action = req.parsedParams.action;
 
-    if(!action) res.status(400).render("error", {message: "No action found in request", error: {status: 400}})
-    
+    if (!action)
+      res
+        .status(400)
+        .render("error", {
+          message: "No action found in request",
+          error: { status: 400 },
+        });
+
     const user = await User.findOne({
       $and: [{ address }, { email }],
     });
@@ -189,7 +206,13 @@ const verifyUser = async function (req, res) {
       const updatedUser = await User.findOneAndUpdate(filter, update);
       res.status(200).json(updatedUser);
     } else if (action === "signin" && user.emailVerified === false) {
-      res.status(403).render("error", { message: "User email not verified, verify email to complete sign up and login", error: {status:403}});
+      res
+        .status(403)
+        .render("error", {
+          message:
+            "User email not verified, verify email to complete sign up and login",
+          error: { status: 403 },
+        });
     } else {
       res.status(200).end();
     }
@@ -199,6 +222,7 @@ const verifyUser = async function (req, res) {
 };
 
 module.exports = {
+  requestSignUp,
   signUp,
   login,
   verifyUser,

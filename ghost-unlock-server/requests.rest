@@ -1,5 +1,5 @@
 # GET https://app.unlock-protocol.com/checkout?client_id=fee8-102-36-149-129.eu.ngrok.io&redirect_uri=https%3A%2F%2Ffee8-102-36-149-129.eu.ngrok.io%2Flogin%2Fverify&email=iamraykhell%40gmail.com
-POST http://localhost:5000/login?code=eyJkIjoiYXBwLnVubG9jay1wcm90b2NvbC5jb20gd2FudHMgeW91IHRvIHNpZ24gaW4gd2l0aCB5b3VyIEV0aGVyZXVtIGFjY291bnQ6XG4weDA5MDNDRjJCRGExMDMxN0EzZDc4NWY1ODE4ODc0Q0NhZjM2ZTY0YTlcblxuXG5VUkk6IGh0dHBzOi8vYXBwLnVubG9jay1wcm90b2NvbC5jb21cblZlcnNpb246IDFcbkNoYWluIElEOiAxXG5Ob25jZTogWkx0ajZnaFk0cXpQcm5GdWVcbklzc3VlZCBBdDogMjAyMi0xMi0xOVQxMDozMDozMC43NDdaXG5FeHBpcmF0aW9uIFRpbWU6IDIwMjItMTItMjZUMTA6MzA6MzAuNzQ2WlxuUmVzb3VyY2VzOlxuLSBodHRwczovL2U2ZDktMTAyLTM2LTE0OS0xMjkuZXUubmdyb2suaW8vIiwicyI6IjB4N2I2ZmZiYzgyOTFhZjExOTdjN2JjZjBiOWVmNDkzNmE3YTJiNjI2ZmVjNjQ1MTc2MTk2YmIxOTY5MWNiZDdlMzAwNTNhZmE0MmFmMjg1ZTBmMDNkZjk3ZWIxNzBlNWRjOGEwZmI4MzYzNDc3OTZhMmZhYjcxNTIyMmQ1OThiNzQxYiJ9&state=undefined
+POST http://localhost:5000/api/create
 # Content-Type: text/html/json
 Content-Type: application/json
 
@@ -29,13 +29,77 @@ Origin: http://localhost:2368
     "username":"raykhell@gmail.com",
     "password":"eyJkIjoiYXBwLnVubG9jay1wcm90b2NvbC5jb20gd2FudHMgeW91IHRvIHNpZ24gaW4gd2l0aCB5b3VyIEV0aGVyZXVtIGFjY291bnQ6XG4weENBNzYzMjMyNzU2Nzc5NmU1MTkyMEY2YjE2MzczZTkyYzc4MjM4NTRcblxuXG5VUkk6IGh0dHBzOi8vYXBwLnVubG9jay1wcm90b2NvbC5jb21cblZlcnNpb246IDFcbkNoYWluIElEOiAzMTMzN1xuTm9uY2U6IDZuUjNYN1lrZ0ZqclllaHZSXG5Jc3N1ZWQgQXQ6IDIwMjMtMDEtMjRUMTY6MTM6MTcuODUzWlxuRXhwaXJhdGlvbiBUaW1lOiAyMDIzLTAxLTMxVDE2OjEzOjE3Ljg1M1pcblJlc291cmNlczpcbi0gaHR0cHM6Ly8yNGE1LTEwMi0zNi0xNDktMTI5LmV1Lm5ncm9rLmlvLyIsInMiOiIweDc3YmUxYzZiMGEzZWZkOTM5ZTI2NGFhNzAyZDcxYWYxOGE3N2NlMGUyNDdmNTNiMzZmYjY5NGUwYTk3YzIzYjA0ODU4YjkwN2ZlNGU2OTlhNzY0MmM2YjZiZmM1N2YxZDRjZTJhMDlkYzk4YWVlMTg4MDdmMmZlNTJkMWEyZDNiMWIifQ"
 }
-###
-POST http://localhost:2368/members/api/send-magic-link/?address=application
+### CREATE A TIER - GHOST ADMIN API
+POST http://localhost:2368/ghost/api/admin/tiers/
 # Content-Type: text/html/json
 Content-Type: application/json
-# Origin: http://localhost:2368
-# Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2NzUyNTYzMTcsImV4cCI6MTY3NTI1NjYxNywiYXVkIjoiL2FkbWlu
+Origin: http://localhost:2368
+Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2Nzg3NDMzNzEsImV4cCI6MTY3ODc0MzY3MSwiYXVkIjoiL2FkbWluLyJ9.mh06xJ9Y9Ithui0KjzA4aFqNNfdsWTPkUnjAgpIOFMs
 
 {
-    "email":"iamraykhell@gmail.com" 
+    "tiers": [
+        {
+            "name": "Platinum",
+            "description": "Access to everything",
+            "welcome_page_url": "/welcome-to-platinum",
+            "visibility": "public",
+            "monthly_price": 1000,
+            "yearly_price": 10000,
+            "currency": "usd",
+            "benefits": [
+                "Benefit 1",
+                "Benefit 2"
+            ]
+        }
+    ]
+}
+
+### GET TIERS - GHOST ADMIN API
+GET http://localhost:2368/ghost/api/admin/tiers/
+# Content-Type: text/html/json
+Content-Type: application/json
+Origin: http://localhost:2368
+Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2Nzg4MDk4MDYsImV4cCI6MTY3ODgxMDEwNiwiYXVkIjoiL2FkbWluLyJ9.5fbzFp8YslRRM_LxWxF5TvkWUD1mvEPgausFc_LMfeo
+
+{
+
+}
+
+### CREATE MEMBER - GHOST ADMIN API
+POST http://localhost:2368/ghost/api/admin/members/
+Content-Type: application/json
+Origin: http://localhost:2368
+Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2Nzg3NDMzNzEsImV4cCI6MTY3ODc0MzY3MSwiYXVkIjoiL2FkbWluLyJ9.mh06xJ9Y9Ithui0KjzA4aFqNNfdsWTPkUnjAgpIOFMs
+
+{
+
+}
+
+### GET MEMBER - GHOST ADMIN API
+GET http://localhost:2368/ghost/api/admin/members/63a0868bce990a0eb4413b31/
+Content-Type: application/json
+Origin: http://localhost:2368
+Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2Nzg4NzkzNzIsImV4cCI6MTY3ODg3OTY3MiwiYXVkIjoiL2FkbWluLyJ9.S6-98zCTtas2ViYHTou-f6BOB1VV7CWGpZsrXOlvJ2A
+
+{
+
+}
+
+### UPDATE MEMBER - GHOST ADMIN API
+PUT http://localhost:2368/ghost/api/admin/members/63a0868bce990a0eb4413b31
+Content-Type: application/json
+Origin: http://localhost:2368
+Authorization: Ghost eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjYzOWY3YWFkY2U5OTBhMGViNDQxM2IyNCJ9.eyJpYXQiOjE2Nzg4Nzg4NzUsImV4cCI6MTY3ODg3OTE3NSwiYXVkIjoiL2FkbWluLyJ9.zXMjfkP5unjzSzE9C4AKxds7ffIe0OY-_B8Z1pDP0AY
+
+{
+    "members": [
+        {
+            "tiers": [
+                {
+                    "id": "640f9802b54a814588a3c351",
+                    "expiry_at": "2023-03-17T21:39:14.000Z"
+                }
+            ]
+        }
+    ]
 }

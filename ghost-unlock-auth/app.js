@@ -6,13 +6,17 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
 const connectDB = require("./config/db")
+// var usersRouter = require("./routes/users");
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 var signupRouter = require("./routes/signup");
 var loginRouter = require("./routes/login");
-var authRouter = require("./routes/auth-verify");
+var authRouter = require("./routes/auth-verify"); 
 // connect to database
 connectDB()
+// handlebars helpers
+const hbs = require("hbs");
+const { hasValidKey } = require("./helpers")
+hbs.registerHelper("hasValidKey", hasValidKey);
 
 var app = express();
 // view engine setup
@@ -33,7 +37,8 @@ app.use("/signup", indexRouter);
 app.use("/signup/verify", signupRouter);
 app.use("/login", loginRouter);
 app.use("/auth/verify", authRouter);
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

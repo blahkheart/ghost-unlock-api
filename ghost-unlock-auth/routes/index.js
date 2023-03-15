@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { parseQueryParams } = require("../middleware/parseQueryParams");
+const { getHasValidKey } = require("../middleware/getHasValidKey");
+const { requestSignUp } = require("../controllers/userController")
 
 /* GET signup page. */
-router.get("/", function (req, res, next) {
-  res.render("signup", { title: "Ghost-Unlock Sign Up", topic: "authentication" });
-});
+router.get("/", parseQueryParams, getHasValidKey, requestSignUp);
 
 module.exports = router;
